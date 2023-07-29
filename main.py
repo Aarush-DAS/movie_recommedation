@@ -43,13 +43,13 @@ def liked_movie():
         "status": "success"
     })
 
-# api to return list of liked movies
-@app.route("/liked")
+@app.route('/liked')
 def liked():
-    global liked_movies
+    global liked_movies    
+
     return jsonify({
-        'data':liked_movies,
-        'status':'success'
+        'data' : liked_movies , 
+        'status' : 'success'
     })
 
 @app.route("/dislike")
@@ -78,25 +78,25 @@ def did_not_watch_view():
         "status": "success"
     })
 
-# api to return list of popular movies
 @app.route("/popular_movies")
 def popular_movies():
-    popular_movies_data=[]
-    for index,row in output.iterrows():
-        _p ={
-            'original_title':row['original_title'],
-            'poster_link':row['poster_link'],
-            'release_date':row['release_date'],
-            'duration':row['runtime'],
-            'rating':row['weighted_rating']/2,
+    popular_movie_data = []
+
+    for index, row in output.iterrows():
+        _p = {
+            "original_title": row['original_title'],
+            "poster_link":row['poster_link'],
+            "release_date":row['release_date'] or "N/A",
+            "duration": row['runtime'],
+            "rating": row['weighted_rating']/2
         }
-        popular_movies_data.append(_p)
-    
+        popular_movie_data.append(_p)
+
     return jsonify({
-        'data':popular_movies_data,
-        'status':'success'
+        "data": popular_movie_data,
+        "status": "success"
     })
-# api to return list of recommended movies
+
 @app.route("/recommended_movies")
 def recommended_movies():
     global liked_movies
@@ -125,5 +125,6 @@ def recommended_movies():
         "data":recommended_movie_data,
         "status": "success"
     })
+
 if __name__ == "__main__":
   app.run()

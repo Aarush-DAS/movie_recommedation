@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from '@react-navigation/native';
+import StackNav from "./navigation/stackNav";
+import { View,SafeAreaView,Platform,StatusBar } from "react-native";
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+  return(
+    <View style={{flex:1}}>
+      <SafeAreaView style={{marginTop:Platform.OS=="android"?StatusBar.currentHeight:0}}/>
+      <NavigationContainer>
+        <StackNav/>
+      </NavigationContainer>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
